@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamFlix - Watch Movies Online</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <h1 class="logo">StreamFlix</h1>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#browse">Browse</a></li>
+                    <li><a href="#my-list">My List</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Search movies..." id="searchInput">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="profile-dropdown">
+                    <img src="https://picsum.photos/seed/profile1/32/32" alt="Profile" class="profile-img">
+                    <div class="dropdown-content">
+                        <a href="#profiles">Switch Profile</a>
+                        <a href="#settings">Settings</a>
+                        <a href="#signout">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <img src="https://picsum.photos/seed/hero-movie/1920/1080" alt="Featured Movie" class="hero-img">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Cosmic Odyssey</h1>
+            <div class="hero-meta">
+                <span class="rating">8.5/10</span>
+                <span class="year">2023</span>
+                <span class="duration">2h 28min</span>
+                <span class="quality">HD</span>
+            </div>
+            <p class="hero-description">
+                A thrilling space adventure where humanity's last hope lies in discovering an ancient alien artifact that could save Earth from impending doom.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="playMovie('cosmic-odyssey')">
+                    <i class="fas fa-play"></i> Play
+                </button>
+                <button class="btn btn-secondary" onclick="showMovieDetails('cosmic-odyssey')">
+                    <i class="fas fa-info-circle"></i> More Info
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Continue Watching -->
+    <section class="content-section">
+        <h2 class="section-title">Continue Watching</h2>
+        <div class="movie-row" id="continue-watching">
+            <!-- Movies will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Trending Now -->
+    <section class="content-section">
+        <h2 class="section-title">Trending Now</h2>
+        <div class="movie-row" id="trending">
+            <!-- Movies will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- New Releases -->
+    <section class="content-section">
+        <h2 class="section-title">New Releases</h2>
+        <div class="movie-row" id="new-releases">
+            <!-- Movies will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Action Movies -->
+    <section class="content-section">
+        <h2 class="section-title">Action Movies</h2>
+        <div class="movie-row" id="action">
+            <!-- Movies will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Comedy Movies -->
+    <section class="content-section">
+        <h2 class="section-title">Comedy</h2>
+        <div class="movie-row" id="comedy">
+            <!-- Movies will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Drama Movies -->
+    <section class="content-section">
+        <h2 class="section-title">Drama</h2>
+        <div class="movie-row" id="drama">
+            <!-- Movies will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- My List -->
+    <section class="content-section" id="my-list-section">
+        <h2 class="section-title">My List</h2>
+        <div class="movie-row" id="my-list">
+            <!-- Movies will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Movie Modal -->
+    <div id="movieModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="" class="modal-img">
+                <div class="modal-info">
+                    <h2 id="modal-title"></h2>
+                    <div class="modal-meta">
+                        <span id="modal-rating"></span>
+                        <span id="modal-year"></span>
+                        <span id="modal-duration"></span>
+                        <span id="modal-quality"></span>
+                    </div>
+                    <p id="modal-description"></p>
+                    <div class="modal-buttons">
+                        <button class="btn btn-primary" onclick="playFromModal()">
+                            <i class="fas fa-play"></i> Play
+                        </button>
+                        <button class="btn btn-secondary" onclick="addToMyList()">
+                            <i class="fas fa-plus"></i> Add to List
+                        </button>
+                    </div>
+                    <div class="modal-details">
+                        <h3>Cast</h3>
+                        <p id="modal-cast"></p>
+                        <h3>Director</h3>
+                        <p id="modal-director"></p>
+                        <h3>Genres</h3>
+                        <p id="modal-genres"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-container">
+            <span class="video-close" onclick="closeVideo()">&times;</span>
+            <video id="videoPlayer" controls>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-info">
+                <h3 id="video-title"></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Selection Modal -->
+    <div id="profileModal" class="profile-modal">
+        <div class="profile-content">
+            <h2>Who's watching?</h2>
+            <div class="profile-grid">
+                <div class="profile-card" onclick="selectProfile('User 1')">
+                    <img src="https://picsum.photos/seed/user1/100/100" alt="User 1">
+                    <span>User 1</span>
+                </div>
+                <div class="profile-card" onclick="selectProfile('User 2')">
+                    <img src="https://picsum.photos/seed/user2/100/100" alt="User 2">
+                    <span>User 2</span>
+                </div>
+                <div class="profile-card" onclick="selectProfile('Kids')">
+                    <img src="https://picsum.photos/seed/kids/100/100" alt="Kids">
+                    <span>Kids</span>
+                </div>
+                <div class="profile-card add-profile" onclick="addProfile()">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Profile</span>
+                </div>
+            </div>
+            <button class="btn-manage-profiles">Manage Profiles</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+</body>
+</html>
